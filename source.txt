@@ -1,0 +1,4 @@
+main:
+	addi	$r0_$zero_12
+	and	$r1_$r0_$one
+	lw	$r1_$r2(20)
