@@ -48,7 +48,7 @@ string findTwoscomplement(string str)
 		if (str[i] == '1')
 			break;
 	if (i == -1)
-		return '1' + str;
+		return str;
 	for (int k = i - 1; k >= 0; k--)
 	{
 		if (str[k] == '1')
@@ -114,6 +114,7 @@ int main()
 	unordered_map<string, int> label_table;
 	ifstream fin1;
 	int count = 0;
+	string result;
 	fin1.open("source.txt");
 	ofstream fout1;
 	fout1.open("machinecode1.txt");
@@ -278,7 +279,9 @@ int main()
 					cout << line;
 					return 0;
 				}
-				fout1 << info[0] << r[0] << r[1] << r[2] << info[2] << info[1] << endl;
+				//fout1 << info[0] << r[0] << r[1] << r[2] << info[2] << info[1] << endl;
+				result=info[0] + r[0] + r[1] + r[2] + info[2] + info[1];
+				fout1<<result.substr(0,8)<<endl<<result.substr(8,8)<<endl<<result.substr(16,8)<<endl<<result.substr(24,8)<<endl;
 				continue;
 			}
 			if (info[1] != "")
@@ -295,7 +298,9 @@ int main()
 				cout << line;
 				return 0;
 			}
-			fout1 << info[0] << r[0] << r[1] << r[2] << info[2] << info[1] << endl;
+			//fout1 << info[0] << r[0] << r[1] << r[2] << info[2] << info[1] << endl;
+			result=info[0] + r[0] + r[1] + r[2] + info[2] + info[1];
+			fout1<<result.substr(0,8)<<endl<<result.substr(8,8)<<endl<<result.substr(16,8)<<endl<<result.substr(24,8)<<endl;	
 			continue;
 		}
 		if (temp == "" || temp == " " || temp == ",")
@@ -319,7 +324,9 @@ int main()
 					cout << line;
 					return 0;
 				}
-				fout1 << info[0] << r[0] << r[1] << r[2] << info[2] << info[1] << endl;
+				//fout1 << info[0] << r[0] << r[1] << r[2] << info[2] << info[1] << endl;
+				result=info[0] + r[0] + r[1] + r[2] + info[2] + info[1];
+				fout1<<result.substr(0,8)<<endl<<result.substr(8,8)<<endl<<result.substr(16,8)<<endl<<result.substr(24,8)<<endl;
 				continue;
 			}
 			else
@@ -333,7 +340,9 @@ int main()
 					cout << line;
 					return 0;
 				}
-				fout1 << info[0] << r[0] << r[1] << info[2] << info[1] << r[2] << endl;
+				//fout1 << info[0] << r[0] << r[1] << info[2] << info[1] << r[2] << endl;
+				result=info[0] + r[0] + r[1] + info[2] + info[1] + r[2];
+				fout1<<result.substr(0,8)<<endl<<result.substr(8,8)<<endl<<result.substr(16,8)<<endl<<result.substr(24,8)<<endl;
 				continue;
 			}
 		}
@@ -359,7 +368,9 @@ int main()
 			return 0;
 		}
 		//cout<<r[1]<<endl;
-		fout1 << info[0] << r[0] << r[1] << r[2] << info[2] << info[1] << endl;
+		//fout1 << info[0] << r[0] << r[1] << r[2] << info[2] << info[1] << endl;
+		result=info[0] + r[0] + r[1] + r[2] + info[2] + info[1];
+		fout1<<result.substr(0,8)<<endl<<result.substr(8,8)<<endl<<result.substr(16,8)<<endl<<result.substr(24,8)<<endl;		
 	}
 	fin1.close();
 	fout1.close();
