@@ -391,9 +391,10 @@ int main()
 			cout << line;
 			return 0;
 		}
+		printf("hi\n");
 		//cout<<r[1]<<endl;
 		//fout1 << info[0] << r[0] << r[1] << r[2] << info[2] << info[1] << endl;
-		result = info[0] + r[0] + r[1] + r[2] + info[2] + info[1];
+		result = info[0] + r[1] + r[2] + r[0] + info[2] + info[1];
 		fout1 << result.substr(0, 8) << endl
 			  << result.substr(8, 8) << endl
 			  << result.substr(16, 8) << endl

@@ -1,2 +1,2 @@
 main:
-	sw $zero,$r0(-3)
+	add $r0,$r1,$r2
