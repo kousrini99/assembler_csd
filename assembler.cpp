@@ -1,45 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-string tobinary(string s)
-{
-	int num = 0;
-	string str = "";
-	for (int i = 0; i < s.length(); i++)
-	{
-		num = num * 10 + (s[i] - '0');
-	}
-	if (num >= pow(2, 16))
-		return "";
-	for (int i = 0; i < 16; i++)
-	{
-		if (num % 2 == 0)
-			str += "0";
-		else
-			str += "1";
-		num /= 2;
-	}
-	reverse(str.begin(), str.end());
-	return str;
-}
-
-string convert_jump_label(int num)
-{
-	string str = "";
-	if (num >= pow(2, 26))
-		return "";
-	for (int i = 0; i < 26; i++)
-	{
-		if (num % 2 == 0)
-			str += "0";
-		else
-			str += "1";
-		num /= 2;
-	}
-	reverse(str.begin(), str.end());
-	return str;
-}
-
 string findTwoscomplement(string str)
 {
 	int n = str.length();
@@ -58,6 +19,56 @@ string findTwoscomplement(string str)
 	}
 	return str;
 	;
+}
+
+
+string tobinary(string s)
+{
+	int num = 0;
+	int flag = 0;
+	string str = "";
+	for (int i = 0; i < s.length(); i++)
+	{
+		if (s[i] == '-')
+		{
+			flag = 1;
+			continue;
+		}
+		num = num * 10 + (s[i] - '0');
+	}
+	if (num >= pow(2, 16))
+		return "";
+	for (int i = 0; i < 16; i++)
+	{
+		if (num % 2 == 0)
+			str += "0";
+		else
+			str += "1";
+		num /= 2;
+	}
+	reverse(str.begin(), str.end());
+	if (flag == 1)
+	{
+		str = findTwoscomplement(str);
+	}
+	return str;
+}
+
+string convert_jump_label(int num)
+{
+	string str = "";
+	if (num >= pow(2, 26))
+		return "";
+	for (int i = 0; i < 26; i++)
+	{
+		if (num % 2 == 0)
+			str += "0";
+		else
+			str += "1";
+		num /= 2;
+	}
+	reverse(str.begin(), str.end());
+	return str;
 }
 
 string convert_branch_label(int num)
@@ -268,9 +279,10 @@ int main()
 		flag = 0;
 		//ifstream fin2;
 		//cout<<"debug"<<endl;//edbug
-		if (isdigit(temp[0]))
+		if (isdigit(temp[0])||temp[0]=='-')
 		{
-			if(info[0]=="00000000000")
+			printf("1\n");
+			if (info[0] == "00000000000")
 			{
 				r[2] = convert_shift_label(temp);
 				if (r[2] == "")
@@ -280,8 +292,11 @@ int main()
 					return 0;
 				}
 				//fout1 << info[0] << r[0] << r[1] << r[2] << info[2] << info[1] << endl;
-				result=info[0] + r[0] + r[1] + r[2] + info[2] + info[1];
-				fout1<<result.substr(0,8)<<endl<<result.substr(8,8)<<endl<<result.substr(16,8)<<endl<<result.substr(24,8)<<endl;
+				result = info[0] + r[0] + r[1] + r[2] + info[2] + info[1];
+				fout1 << result.substr(0, 8) << endl
+					  << result.substr(8, 8) << endl
+					  << result.substr(16, 8) << endl
+					  << result.substr(24, 8) << endl;
 				continue;
 			}
 			if (info[1] != "")
@@ -299,8 +314,11 @@ int main()
 				return 0;
 			}
 			//fout1 << info[0] << r[0] << r[1] << r[2] << info[2] << info[1] << endl;
-			result=info[0] + r[0] + r[1] + r[2] + info[2] + info[1];
-			fout1<<result.substr(0,8)<<endl<<result.substr(8,8)<<endl<<result.substr(16,8)<<endl<<result.substr(24,8)<<endl;	
+			result = info[0] + r[1] + r[0] + r[2] + info[2] + info[1];
+			fout1 << result.substr(0, 8) << endl
+				  << result.substr(8, 8) << endl
+				  << result.substr(16, 8) << endl
+				  << result.substr(24, 8) << endl;
 			continue;
 		}
 		if (temp == "" || temp == " " || temp == ",")
@@ -325,13 +343,16 @@ int main()
 					return 0;
 				}
 				//fout1 << info[0] << r[0] << r[1] << r[2] << info[2] << info[1] << endl;
-				result=info[0] + r[0] + r[1] + r[2] + info[2] + info[1];
-				fout1<<result.substr(0,8)<<endl<<result.substr(8,8)<<endl<<result.substr(16,8)<<endl<<result.substr(24,8)<<endl;
+				result = info[0] + r[0] + r[1] + r[2] + info[2] + info[1];
+				fout1 << result.substr(0, 8) << endl
+					  << result.substr(8, 8) << endl
+					  << result.substr(16, 8) << endl
+					  << result.substr(24, 8) << endl;
 				continue;
 			}
 			else
 			{
-				int res = val - (count-1) -1 ;
+				int res = val - (count - 1) - 1;
 				//cout << count << " " << val << " " << res << endl;
 				r[2] = convert_branch_label(res);
 				if (r[2] == "")
@@ -341,8 +362,11 @@ int main()
 					return 0;
 				}
 				//fout1 << info[0] << r[0] << r[1] << info[2] << info[1] << r[2] << endl;
-				result=info[0] + r[0] + r[1] + info[2] + info[1] + r[2];
-				fout1<<result.substr(0,8)<<endl<<result.substr(8,8)<<endl<<result.substr(16,8)<<endl<<result.substr(24,8)<<endl;
+				result = info[0] + r[0] + r[1] + info[2] + info[1] + r[2];
+				fout1 << result.substr(0, 8) << endl
+					  << result.substr(8, 8) << endl
+					  << result.substr(16, 8) << endl
+					  << result.substr(24, 8) << endl;
 				continue;
 			}
 		}
@@ -369,8 +393,11 @@ int main()
 		}
 		//cout<<r[1]<<endl;
 		//fout1 << info[0] << r[0] << r[1] << r[2] << info[2] << info[1] << endl;
-		result=info[0] + r[0] + r[1] + r[2] + info[2] + info[1];
-		fout1<<result.substr(0,8)<<endl<<result.substr(8,8)<<endl<<result.substr(16,8)<<endl<<result.substr(24,8)<<endl;		
+		result = info[0] + r[0] + r[1] + r[2] + info[2] + info[1];
+		fout1 << result.substr(0, 8) << endl
+			  << result.substr(8, 8) << endl
+			  << result.substr(16, 8) << endl
+			  << result.substr(24, 8) << endl;
 	}
 	fin1.close();
 	fout1.close();
